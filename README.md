@@ -20,7 +20,7 @@ Key metrics tracked include **accuracy**, **F1-score**, and **loss** over traini
   - [Visual Comprehension of Model](#5-visual-comprehension-of-model)
 - [Training Loop](#training-loop)
 - [Model Performance Analysis](#model-performance-analysis)
-  - [Training History](1-training-history-accuracy-f1-score-and-loss-over-epochs)
+  - [Training History](#1-training-history-accuracy-f1-score-and-loss-over-epochs)
   - [Confusion Matrix and Classification Report](#confusion-matrix-and-classification-report)
   - [ROC-AUC Curves](#roc-auc-curves)
 - [Requirements](#requirements)
