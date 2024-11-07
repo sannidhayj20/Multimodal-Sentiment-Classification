@@ -91,9 +91,11 @@ def preprocess_image(image_name):
         return torch.zeros(3, 224, 224)
 ```
 ## Model Architecture
-#1). Text Encoder (RoBERTa)
-The text encoder uses RoBERTa with a dropout layer. Layers are initially frozen for faster training.
-```bash
+
+### 1. Text Encoder (RoBERTa)
+The text encoder uses **RoBERTa** with a dropout layer. Layers are initially frozen for faster training.
+
+```python
 class TextEncoder(nn.Module):
     def __init__(self):
         super(TextEncoder, self).__init__()
@@ -105,43 +107,8 @@ class TextEncoder(nn.Module):
     def forward(self, input_ids, attention_mask):
         outputs = self.roberta(input_ids=input_ids, attention_mask=attention_mask)
         return self.dropout(outputs.pooler_output)
-```
-# 2). Image Encoder (DenseNet-121)
-The image encoder is built on DenseNet-121 to extract image features.
-class ImageEncoder(nn.Module):
-    def __init__(self):
-        super(ImageEncoder, self).__init__()
-        densenet = models.densenet121(pretrained=True)
-        self.densenet = nn.Sequential(*list(densenet.features.children()))
-        for param in self.densenet.parameters():
-            param.requires_grad = False
-        self.dropout = nn.Dropout(0.3)
-    
-    def forward(self, images):
-        features = self.densenet(images)
-        features = torch.nn.functional.adaptive_avg_pool2d(features, (1, 1))
-        return self.dropout(features.view(features.size(0), -1))
-Multimodal Transformer Model
-A Transformer model fuses text and image features for sentiment classification.
 
-python
-Copy code
-class MultimodalTransformerModel(nn.Module):
-    def __init__(self, text_dim=768, image_dim=1024, hidden_dim=512, output_dim=4):
-        super(MultimodalTransformerModel, self).__init__()
-        self.text_projection = nn.Linear(text_dim, hidden_dim)
-        self.image_projection = nn.Linear(image_dim, hidden_dim)
-        encoder_layer = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=8)
-        self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=4)
-        self.classifier = nn.Linear(hidden_dim, output_dim)
-        
-    def forward(self, text_features, image_features):
-        batch_size = text_features.size(0)
-        text_features = self.text_projection(text_features)
-        image_features = self.image_projection(image_features)
-        combined_features = torch.cat([text_features.unsqueeze(1), image_features.unsqueeze(1)], dim=1)
-        fused_features = self.transformer_encoder(combined_features).mean(dim=1)
-        return self.classifier(fused_features)
+```
 Training Loop
 The training loop saves models with the highest accuracy and F1-score across epochs.
 
