@@ -22,7 +22,7 @@ Key metrics tracked include **accuracy**, **F1-score**, and **loss** over traini
 - [Model Performance Analysis](#model-performance-analysis)
   - [Training History](#1-training-history-accuracy-f1-score-and-loss-over-epochs)
   - [Confusion Matrix and Classification Report](#2-confusion-matrix-and-classification-report-for-detailed-performance-analysis)
-  - [ROC-AUC Curves](3-roc-auc-curves-to-evaluate-performance-across-all-classes)
+  - [ROC-AUC Curves](#3-roc-auc-curves-to-evaluate-performance-across-all-classes)
 - [Requirements](#requirements)
 - [Cloning the Repository](#cloning-the-repository)
 - [Running And Training The Model](#running-and-training-the-model)
