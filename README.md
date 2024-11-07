@@ -59,6 +59,8 @@ plt.title("Pie Chart Distribution of Labels")
 plt.show()
 print(data.Label.value_counts())
 ```
+![image](https://github.com/user-attachments/assets/705bbfd9-22b9-4f47-9c9f-6d7ee63c4b82)
+
 # Text and Image Preprocessing
 Text Preprocessing
 We use the RoBERTa tokenizer with padding and truncation.
