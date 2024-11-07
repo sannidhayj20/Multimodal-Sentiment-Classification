@@ -256,12 +256,12 @@ pip install -r requirements.txt
 Clone this repository and navigate into the project directory:
 ```python
 git clone https://github.com/sannidhayj20/Multimodal-Sentiment-Classification.git
-cd yourrepository
+cd Multimodal-Sentiment-Classification
 ```
 # Running And Training The Model
 To begin training and evaluating the model, run the main training script:
 ```python
-python train.py
+python multimodal-sentiment-classification-highest-acc.ipynb
 ```
 # Output files
 Upon completion of training, the following outputs will be generated:
