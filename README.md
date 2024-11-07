@@ -255,7 +255,7 @@ pip install -r requirements.txt
 # Cloning the Repository
 Clone this repository and navigate into the project directory:
 ```python
-git clone https://github.com/yourusername/yourrepository.git
+git clone https://github.com/sannidhayj20/Multimodal-Sentiment-Classification.git
 cd yourrepository
 ```
 # Running And Training The Model
