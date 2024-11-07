@@ -23,10 +23,10 @@ First, install the necessary libraries and set up the environment for GPU debugg
 ```bash
 !pip install torch-geometric
 %env CUDA_LAUNCH_BLOCKING=1
-Import essential libraries:
+```
 
-python
-Copy code
+# Import essential libraries:
+
 import os
 import shutil
 import torch
@@ -41,13 +41,15 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 from torch.optim.lr_scheduler import ReduceLROnPlateau
-Dataset Loading and Preprocessing
+
+# Dataset Loading and Preprocessing
 Load the dataset and remove errors and missing values.
-python
-Copy code
+```bash
+
 data = pd.read_csv("/kaggle/input/tweet-data-game-on/Updated_Tweet_Data.csv")
 data = data[data['Content'] != "Error: Tweet could not be scraped"]
 data = data.dropna(subset=['Image_Name']).reset_index(drop=True)
+```
 Plot label distribution to visualize class balance.
 python
 Copy code
