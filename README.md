@@ -188,7 +188,9 @@ def collate_fn(batch):
 ## 5). Visual Comprehension of Model
 To help visualize how the model works and understand its architecture, a video demonstration has been provided. It showcases the fusion of text and image features, and how they are processed through the model for sentiment classification.
 
-https://github.com/user-attachments/assets/4ad9cf85-e0c4-4b31-886f-6f6bf13e05e0
+https://github.com/user-attachments/assets/c204ed63-73c4-40cc-a5df-4bbc8d213321
+
+
 
 
 # Training Loop
