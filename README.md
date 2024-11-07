@@ -50,30 +50,28 @@ data = pd.read_csv("/kaggle/input/tweet-data-game-on/Updated_Tweet_Data.csv")
 data = data[data['Content'] != "Error: Tweet could not be scraped"]
 data = data.dropna(subset=['Image_Name']).reset_index(drop=True)
 ```
-Plot label distribution to visualize class balance.
-python
-Copy code
+# Plot label distribution to visualize class balance.
+```bash
 label_counts = data['Label'].value_counts()
 plt.figure(figsize=(8, 8))
 plt.pie(label_counts, labels=label_counts.index, autopct='%1.1f%%', startangle=140)
 plt.title("Pie Chart Distribution of Labels")
 plt.show()
 print(data.Label.value_counts())
-Text and Image Preprocessing
+```
+# Text and Image Preprocessing
 Text Preprocessing
 We use the RoBERTa tokenizer with padding and truncation.
 
-python
-Copy code
+```bash
 tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
 def preprocess_text(text):
     encoding = tokenizer(text, padding="max_length", max_length=128, truncation=True, return_tensors="pt")
     return encoding["input_ids"].squeeze(0), encoding["attention_mask"].squeeze(0)
+```
 Image Preprocessing
 Images are resized, normalized, and augmented for better model generalization.
-
-python
-Copy code
+```bash
 image_transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.RandomHorizontalFlip(),
@@ -81,7 +79,6 @@ image_transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
-
 def preprocess_image(image_name):
     if pd.isna(image_name) or not isinstance(image_name, str):
         return torch.zeros(3, 224, 224)
@@ -92,12 +89,11 @@ def preprocess_image(image_name):
     except FileNotFoundError:
         print(f"Warning: Image file '{image_path}' not found. Using placeholder.")
         return torch.zeros(3, 224, 224)
-Model Architecture
-Text Encoder (RoBERTa)
+```
+## Model Architecture
+#1). Text Encoder (RoBERTa)
 The text encoder uses RoBERTa with a dropout layer. Layers are initially frozen for faster training.
-
-python
-Copy code
+```bash
 class TextEncoder(nn.Module):
     def __init__(self):
         super(TextEncoder, self).__init__()
@@ -109,11 +105,9 @@ class TextEncoder(nn.Module):
     def forward(self, input_ids, attention_mask):
         outputs = self.roberta(input_ids=input_ids, attention_mask=attention_mask)
         return self.dropout(outputs.pooler_output)
-Image Encoder (DenseNet-121)
+```
+# 2). Image Encoder (DenseNet-121)
 The image encoder is built on DenseNet-121 to extract image features.
-
-python
-Copy code
 class ImageEncoder(nn.Module):
     def __init__(self):
         super(ImageEncoder, self).__init__()
