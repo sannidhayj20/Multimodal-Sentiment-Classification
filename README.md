@@ -26,7 +26,7 @@ First, install the necessary libraries and set up the environment for GPU debugg
 ```
 
 # Import essential libraries:
-
+```bash
 import os
 import shutil
 import torch
@@ -41,7 +41,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 from torch.optim.lr_scheduler import ReduceLROnPlateau
-
+```
 # Dataset Loading and Preprocessing
 Load the dataset and remove errors and missing values.
 ```bash
