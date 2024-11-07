@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains a comprehensive implementation of a multimodal sentiment analysis model that classifies tweets based on both text and images into four sentiment categories: "Certainly Fake," "Probably Fake," "Probably Real," and "Certainly Real." The model leverages RoBERTa for text encoding, DenseNet for image encoding, and a Transformer architecture for feature fusion. Key performance metrics tracked during training include accuracy, F1-score, and loss.
+This repository presents a comprehensive implementation of a **Multimodal Sentiment Analysis** model that classifies tweets based on both text and images into four sentiment categories: "Certainly Fake," "Probably Fake," "Probably Real," and "Certainly Real." The model employs **RoBERTa** for text encoding, **DenseNet** for image encoding, and a **Transformer architecture** for effective feature fusion. The implementation tracks key performance metrics, including accuracy, F1-score, and loss, during the training process.
 
 ## Table of Contents
 
@@ -12,20 +12,25 @@ This repository contains a comprehensive implementation of a multimodal sentimen
 - [Installation](#installation)
 - [Usage](#usage)
 - [Model Architecture](#model-architecture)
+  - [Text Encoder](#text-encoder-roberta)
+  - [Image Encoder](#image-encoder-densenet-121)
+  - [Multimodal Transformer Model](#multimodal-transformer-model)
 - [Training](#training)
+  - [Training Configuration](#training-configuration)
 - [Evaluation](#evaluation)
 - [Results](#results)
 - [Visualizations](#visualizations)
+- [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Features
 
-- Multimodal sentiment analysis combining text and image data.
-- Utilizes pre-trained models (RoBERTa and DenseNet) for efficient feature extraction.
-- Transformer-based architecture for effective feature fusion.
-- Comprehensive evaluation metrics including accuracy and F1-score.
-- Visualization of training history and performance analysis.
+- **Multimodal Analysis**: Combines textual and visual data for improved sentiment classification.
+- **Pre-trained Models**: Utilizes state-of-the-art pre-trained models (RoBERTa and DenseNet) for efficient feature extraction.
+- **Transformer Architecture**: Employs a Transformer-based model for effective feature fusion and classification.
+- **Performance Metrics**: Tracks and reports accuracy, F1-score, and loss during training.
+- **Visualization Tools**: Provides visual insights into training history, performance metrics, and error analysis.
 
 ## Requirements
 
