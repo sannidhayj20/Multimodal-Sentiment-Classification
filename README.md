@@ -1,6 +1,6 @@
 # Multimodal Sentiment Analysis with Transformer Model
 
-This project demonstrates a multimodal approach to sentiment analysis using **RoBERTa** for text encoding, **DenseNet** for image encoding, and a **Transformer** model for feature fusion. The model classifies tweets into sentiment categories: **Certainly Fake**, **Probably Fake**, **Probably Real**, and **Certainly Real**.
+This project demonstrates a multimodal approach to sentiment analysis using **DeBERTa** for text encoding, **DenseNet** for image encoding, and a **Transformer** model for feature fusion. The model classifies tweets into sentiment categories: **Certainly Fake**, **Probably Fake**, **Probably Real**, and **Certainly Real**.
 
 Key metrics tracked include **accuracy**, **F1-score**, and **loss** over training epochs, with the best-performing models saved.
 
@@ -13,7 +13,7 @@ Key metrics tracked include **accuracy**, **F1-score**, and **loss** over traini
   - [Text Preprocessing](#text-preprocessing)
   - [Image Preprocessing](#image-preprocessing)
 - [Model Architecture](#model-architecture)
-  - [Text Encoder (RoBERTa)](#1-text-encoder-roberta)
+  - [Text Encoder (DeBERTa)](#1-text-encoder-DeBERTa)
   - [Image Encoder (DenseNet-121)](#2-image-encoder-densenet-121)
   - [Multimodal Transformer Model](#3-multimodal-transformer-model)
   - [Custom Collate Function](#4-custom-collate-function)
@@ -49,7 +49,7 @@ import shutil
 import torch
 import torch.nn as nn
 import pandas as pd
-from transformers import RobertaTokenizer, RobertaModel
+from transformers import DeBERTaTokenizer, DeBERTaModel
 from torchvision import models, transforms
 from torch_geometric.loader import DataLoader
 from PIL import Image
@@ -80,10 +80,10 @@ print(data.Label.value_counts())
 
 # Text and Image Preprocessing
 ## Text Preprocessing
-We use the RoBERTa tokenizer with padding and truncation.
+We use the DeBERTa tokenizer with padding and truncation.
 
 ```bash
-tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
+tokenizer = DeBERTaTokenizer.from_pretrained("DeBERTa-base")
 def preprocess_text(text):
     encoding = tokenizer(text, padding="max_length", max_length=128, truncation=True, return_tensors="pt")
     return encoding["input_ids"].squeeze(0), encoding["attention_mask"].squeeze(0)
@@ -111,20 +111,20 @@ def preprocess_image(image_name):
 ```
 # Model Architecture
 
-## 1). Text Encoder (RoBERTa)
-The text encoder uses **RoBERTa** with a dropout layer. Layers are initially frozen for faster training.
+## 1). Text Encoder (DeBERTa)
+The text encoder uses **DeBERTa** with a dropout layer. Layers are initially frozen for faster training.
 
 ```python
 class TextEncoder(nn.Module):
     def __init__(self):
         super(TextEncoder, self).__init__()
-        self.roberta = RobertaModel.from_pretrained("roberta-base")
-        for param in self.roberta.parameters():
+        self.DeBERTa = DeBERTaModel.from_pretrained("DeBERTa-base")
+        for param in self.DeBERTa.parameters():
             param.requires_grad = False
         self.dropout = nn.Dropout(0.3)
 
     def forward(self, input_ids, attention_mask):
-        outputs = self.roberta(input_ids=input_ids, attention_mask=attention_mask)
+        outputs = self.DeBERTa(input_ids=input_ids, attention_mask=attention_mask)
         return self.dropout(outputs.pooler_output)
 
 ```
