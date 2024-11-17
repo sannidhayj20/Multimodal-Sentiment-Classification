@@ -118,14 +118,12 @@ The text encoder uses **DeBERTa** with a dropout layer. Layers are initially fro
 class TextEncoder(nn.Module):
     def __init__(self):
         super(TextEncoder, self).__init__()
-        self.DeBERTa = DeBERTaModel.from_pretrained("DeBERTa-base")
-        for param in self.DeBERTa.parameters():
-            param.requires_grad = False
-        self.dropout = nn.Dropout(0.3)
+        self.deberta = DebertaV2Model.from_pretrained("microsoft/deberta-v3-large")
+        self.proj = nn.Linear(1024, 512)  # Project DeBERTaV3 output to 512-dim
 
     def forward(self, input_ids, attention_mask):
-        outputs = self.DeBERTa(input_ids=input_ids, attention_mask=attention_mask)
-        return self.dropout(outputs.pooler_output)
+        outputs = self.deberta(input_ids=input_ids, attention_mask=attention_mask).last_hidden_state
+        return self.proj(outputs[:, 0, :])  # Use [CLS] token for text representation
 
 ```
 ## 2). Image Encoder (DenseNet-121)
