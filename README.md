@@ -49,7 +49,7 @@ import shutil
 import torch
 import torch.nn as nn
 import pandas as pd
-from transformers import DeBERTaTokenizer, DeBERTaModel
+from transformers import DebertaV2Tokenizer, DebertaV2Model
 from torchvision import models, transforms
 from torch_geometric.loader import DataLoader
 from PIL import Image
@@ -83,7 +83,7 @@ print(data.Label.value_counts())
 We use the DeBERTa tokenizer with padding and truncation.
 
 ```bash
-tokenizer = DeBERTaTokenizer.from_pretrained("DeBERTa-base")
+tokenizer = DebertaV2Tokenizer.from_pretrained("microsoft/deberta-v3-large")
 def preprocess_text(text):
     encoding = tokenizer(text, padding="max_length", max_length=128, truncation=True, return_tensors="pt")
     return encoding["input_ids"].squeeze(0), encoding["attention_mask"].squeeze(0)
